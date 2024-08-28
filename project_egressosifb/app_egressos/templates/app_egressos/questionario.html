@@ -1,0 +1,285 @@
+{% extends 'app_egressos/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Egressos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #084c61;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #046683;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .radio-group {
+            margin-bottom: 20px;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+            margin-right: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .buttons button {
+            background-color: #f04d22;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: #c0401a;
+        }
+
+        .buttons button.next {
+            background-color: #28a745;
+        }
+
+        .buttons button.next:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="questionarioForm">
+            <div class="form-section active" id="section1">
+                <h2>Deseja receber informações?</h2>
+                <div class="radio-group">
+                    <label><input type="radio" name="informacoes" value="Sim"> Sim</label>
+                    <label><input type="radio" name="informacoes" value="Não"> Não</label>
+                </div>
+
+                <h2>Você concluiu seu curso superior no ano letivo de 2022?</h2>
+                <div class="radio-group">
+                    <label><input type="radio" name="conclusao" value="Sim"> Sim</label>
+                    <label><input type="radio" name="conclusao" value="Não"> Não</label>
+                </div>
+
+                <h2>Você trabalhava antes de ingressar no IFB?</h2>
+                <div class="radio-group">
+                    <label><input type="radio" name="empregabilidade" value="Sim"> Sim</label>
+                    <label><input type="radio" name="empregabilidade" value="Não"> Não</label>
+                </div>
+
+                <label for="instituto">Em qual Campus do IFB você fez seu curso superior?</label>
+                <select name="instituto" id="instituto">
+                    <option value="CBRA-Brasília">CBRA-Brasília</option>
+                    <option value="CCEI-Ceilândia">CCEI-Ceilândia</option>
+                    <option value="CEST-Estrutural">CEST-Estrutural</option>
+                    <option value="CCEI-Ceilândia">CCEI-Ceilândia</option>
+                    <option value="CGAM-Gama">CGAM-Gama</option>
+                    <option value="CPLA-Planaltina">CPLA-Planaltina</option>
+                    <option value="CRIF-Riacho Fundo">CRIF-Riacho Fundo</option>
+                    <option value="CSAM-Samambaia">CSAM-Samambaia</option>
+                    <option value="CSSB-São Sebastião">CSSB-São Sebastião</option>
+                    <option value="CTAG-Taguatinga">CTAG-Taguatinga</option>
+                </select>
+
+                <label for="curso">Qual curso superior você concluiu no IFB?</label>
+                <select name="curso" id="curso">
+                    <option value="2ª Licenciatura em Letras-Português">2ª Licenciatura em Letras-Português</option>
+                    <option value="Bacharelado em Administração">Bacharelado em Administração</option>
+                    <option value="Bacharelado em Agronomia">Bacharelado em Agronomia</option>
+                    <option value="Bacharelado em Ciências da Computação">Bacharelado em Ciências da Computação</option>
+                    <option value="Bacharelado em Engenharia Civil">Bacharelado em Engenharia Civil</option>
+                    <option value="Licenciatura em Biologia">Licenciatura em Biologia</option>
+                    <option value="Licenciatura em Computação">Licenciatura em Computação</option>
+                    <option value="Licenciatura em Dança">Licenciatura em Dança</option>
+                    <option value="Licenciatura em Educação Profissional">Licenciatura em Educação Profissional</option>
+                    <option value="Licenciatura em Física">Licenciatura em Física</option>
+                    <option value="Licenciatura em Geografia">Licenciatura em Geografia</option>
+                    <option value="Licenciatura em Letras - Língua Espanhola">Licenciatura em Letras - Língua Espanhola</option>
+                    <option value="Licenciatura em Letras - Língua Portuguesa">Licenciatura em Letras - Língua Portuguesa</option>
+                    <option value="Licenciatura em Matemática">Licenciatura em Matemática</option>
+                    <option value="Licenciatura em Pedagogia">Licenciatura em Pedagogia</option>
+                    <option value="Tecnologia em Agroecologia">Tecnologia em Agroecologia</option>
+                    <option value="Tecnologia em Alimentos">Tecnologia em Alimentos</option>
+                    <option value="Tecnologia em Automação Industrial">Tecnologia em Automação Industrial</option>
+                    <option value="Tecnologia em Design de Moda">Tecnologia em Design de Moda</option>
+                    <option value="Tecnologia em Design de Produtos">Tecnologia em Design de Produtos</option>
+                    <option value="Tecnologia em Eventos">Tecnologia em Eventos</option>
+                    <option value="Tecnologia em Gastronomia">Tecnologia em Gastronomia</option>
+                    <option value="Tecnologia em Gestão Pública">Tecnologia em Gestão Pública</option>
+                    <option value="Tecnologia em Hotelaria">Tecnologia em Hotelaria</option>
+                    <option value="Tecnologia em Logística">Tecnologia em Logística</option>
+                    <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                    <option value="Tecnologia em Secretariado">Tecnologia em Secretariado</option>
+                    <option value="Tecnologia em Sistemas para Internet">Tecnologia em Sistemas para Internet</option>                    
+                </select>
+
+                <h2>Concluiu o seu curso no tempo previsto?</h2>
+                <div class="radio-group">
+                    <label><input type="radio" name="conclusaoCurso" value="Sim"> Sim, concluí no tempo certo e sem reprovações.</label>
+                    <label><input type="radio" name="conclusaoCurso" value="Sim"> Sim, concluí no tempo certo, mas reprovei em uma ou mais disciplinas.</label>
+                    <label><input type="radio" name="conclusaoCurso" value="Não"> Não concluí no tempo certo, porque tranquei o curso por um período ou porque tive reprovações.</label>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" class="next" onclick="nextSection(2)">Próxima</button>
+                </div>
+            </div>
+
+            <div class="form-section" id="section2">
+                <label for="permanencia">Se você teve acesso a políticas de auxílio permanência durante o curso slecione o item:</label>
+                <select name="permanencia" id="permanencia">
+                    <option value="Selecione">Selecione</option>
+                    <option value="Auxílio permanência">Auxílio permanência</option>
+                    <option value="Auxílio emergencial">Auxílio emergencial</option>
+                    <option value="Auxílio digital">Auxílio digital</option>
+                    <option value="Monitoria">Monitoria</option>
+                    <option value="Cesta básica">Cesta básica</option>
+                    <option value="Programa de apoio ao desenvolvimento técnico-científico (PADTC)">Programa de apoio ao desenvolvimento técnico-científico (PADTC)</option>
+                    <option value="Residência estudantil">Residência estudantil</option>
+                    <option value="Não fui beneficiário de nenhuma destas políticas">Não fui beneficiário de nenhuma destas políticas</option>
+                </select>
+
+                <label for="projetos">Participou de projetos extracurriculares com pelo menos seis meses de duração durante o curso?</label>
+                <select name="projetos" id="projetos">
+                    <option value="">Selecione</option>
+                    <option value="Monitoria, PIPA, PIBID, etc">Monitoria, PIPA, PIBID, etc</option>
+                    <option value="PIBIC, FABIN, PIBITI, meninas na ciência, etc">PIBIC, FABIN, PIBITI, meninas na ciência, etc</option>
+                    <option value="PINCEL, LudoIF, empresa junior, JIF, etc">PINCEL, LudoIF, empresa junior, JIF, etc</option>
+                    <option value="Centro acadêmico, grêmio estudantil, colegiado, DCE, CONSUP, CEPE, etc">Centro acadêmico, grêmio estudantil, colegiado, DCE, CONSUP, CEPE, etc</option>
+                    <option value="Não participou">Não participou</option>
+                </select>
+
+                <label for="formacao">Qual era sua formação antes de entrar no IFB?</label>
+                <select name="formacao" id="formacao">
+                    <option value="">Selecione</option>
+                    <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                    <option value="Técnico de Nível Médio">Técnico de Nível Médio</option>
+                    <option value="Superior Incompleto">Superior Incompleto</option>
+                    <option value="Superior Completo">Superior Completo</option>
+                    <option value="Pós-Graduação">Pós-Graduação</option>
+                </select>
+                
+
+                <div class="buttons">
+                    <button type="button" onclick="prevSection(1)">Anterior</button>
+                    <button type="button" class="next" onclick="nextSection(3)">Próxima</button>
+                </div>
+            </div>
+
+            <div class="form-section" id="section3">
+                <h2>Informações Pessoais</h2>
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome">
+
+                <label for="cpf">CPF:</label>
+                <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00">
+
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" name="dataNascimento" id="dataNascimento">
+
+                <label for="nacionalidade">Nacionalidade:</label>
+                <input type="text" name="nacionalidade" id="nacionalidade">
+
+                <label for="telefone">Telefone:</label>
+                <input type="text" name="telefone" id="telefone" placeholder="(00) 0000-0000">
+
+                <label for="genero">Gênero:</label>
+                <select name="genero" id="genero">
+                    <option value="">Selecione</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Outro">Outro</option>
+                </select>
+
+                <label for="orientacaoSexual">Orientação Sexual:</label>
+                <select name="orientacaoSexual" id="orientacaoSexual">
+                    <option value="">Selecione</option>
+                    <option value="Heterossexual">Heterossexual</option>
+                    <option value="LGBTQIAPN+">LGBTQIAPN+</option>
+                    <option value="Outro">Outro</option>
+                </select>
+                
+
+                <div class="buttons">
+                    <button type="button" onclick="prevSection(2)">Anterior</button>
+                    <button type="submit" style="background-color: #28a745;">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function nextSection(sectionNumber) {
+            var currentSection = document.querySelector('.form-section.active');
+            var nextSection = document.getElementById('section' + sectionNumber);
+            if (nextSection) {
+                currentSection.classList.remove('active');
+                nextSection.classList.add('active');
+            }
+        }
+
+        function previousSection(sectionNumber) {
+            var currentSection = document.querySelector('.form-section.active');
+            var prevSection = document.getElementById('section' + sectionNumber);
+            if (prevSection) {
+                currentSection.classList.remove('active');
+                prevSection.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

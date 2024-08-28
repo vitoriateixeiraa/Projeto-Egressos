@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Além do IFB</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body style="background-color: #154A68;">
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
+        <img src="{% static 'images/logo.png' %}" alt="Além do IFB" style="width: 200px; margin-bottom: 30px;">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div style="margin-bottom: 20px;">
+                <input type="text" name="cpf" placeholder="000.000.000-00" style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;">
+            </div>
+            <div>
+                <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Entrar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
